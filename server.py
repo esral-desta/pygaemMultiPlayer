@@ -37,41 +37,22 @@ def threaded_client(conn, player):
     while True:
         try:
             data = pickle.loads(conn.recv(4096))
-            players[player] = data
+            players[0] = data[0]
+            players[1] = data[1]
 
             if not data:
                 print("Disconnected")
                 break
             else:
-                if player == 1:
-                    if players[1].hitflag1 == True:
-                    #     pass
-                        # print("checked")
-                        # print("reducing for ",players[0].name)
-                        players[0].health -= 1
-                        players[0].hitflag2 = True
-                        players[1].hitflag1 == False
-                        # print("value set to ",player[0].health)
-                    reply = players[0]
-                    conn.sendall(pickle.dumps(reply))
-                    players[0].hitflag2 = False
-                if player == 0:
-                    print("not checked")
+                conn.sendall(pickle.dumps(players))
+                # if player == 1:
 
-                    if players[0].hitflag1 == True:
-                        # print("checked")
-                        # print("reducing for ",players[1].name)
-                        players[1].health -= 1
-                        players[0].hitflag2 = True
-                        players[0].hitflag1 == False
-                        # print("value set to ",player[1].health)
-                    reply = players[1]
-                    conn.sendall(pickle.dumps(reply))
-                    players[0].hitflag2 = False
-            # conn.sendall()
-            # conn.send(pickle.dumps(reply))
-            # player1[1].hitflag2 = False
-            # player1[2].hitflag2 = False
+                #     reply = players[0]
+                #     conn.sendall(pickle.dumps(reply))
+                # if player == 0:
+                #     reply = players[1]
+                #     conn.sendall(pickle.dumps(reply))
+
         except:
             break
 
