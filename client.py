@@ -31,13 +31,15 @@ def redrawWindow(win,player, player2):
     pygame.display.update()
 
 def draw_results(win,currentplayer,p2):
-    currentplayer_health_text = HEALTH_FONT.render(currentplayer.name + str(currentplayer.health),1,WHITE)
     p2_health_text = HEALTH_FONT.render(p2.name + str(p2.health),1,WHITE)
 
     if currentplayer.name == "esral":
+        p2_health_text = HEALTH_FONT.render(p2.name + str(p2.health),1,WHITE)
+        currentplayer_health_text = HEALTH_FONT.render(currentplayer.name + str(p2.op_health),1,WHITE)
         win.blit(currentplayer_health_text,(10,10))
         win.blit(p2_health_text,(WIDTH-currentplayer_health_text.get_width()-10,10))
     if currentplayer.name == "desta":
+        p2_health_text = HEALTH_FONT.render(p2.name + str(p2.health),1,WHITE)
         currentplayer_health_text = HEALTH_FONT.render(currentplayer.name + str(p2.op_health),1,WHITE)
         win.blit(p2_health_text,(10,10))
         win.blit(currentplayer_health_text,(WIDTH-p2_health_text.get_width()-10,10))

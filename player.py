@@ -80,8 +80,8 @@ class Player():
 
                 if p2.box.colliderect(bullet):
                     print("collition accoured")
+                    self.hitflag = True
                     self.bullets.remove(bullet)
-
                 if bullet.x < 0:
                     self.bullets.remove(bullet)
     def move(self,BORDER,WIDTH,HEIGHT):

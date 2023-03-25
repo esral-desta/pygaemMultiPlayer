@@ -37,8 +37,12 @@ def threaded_client(conn, player):
                 if player == 1:
                     players[0].op_health = players[1].health
                     reply = players[0]
+                    if players[1].hitflag == True:
+                        players[0].health -=1
+                        players[1].hitflag = False
                     conn.sendall(pickle.dumps(reply))
                 if player == 0:
+                    players[1].op_health = players[0].health
                     reply = players[1]
                     if players[0].hitflag == True:
                         players[1].health -=1
