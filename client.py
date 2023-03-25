@@ -28,6 +28,14 @@ def redrawWindow(win,player, player2):
     player.draw(win,WIDTH)
     player2.draw(win,WIDTH)
     draw_results(win,player,player2)
+    if player2.thereisawinner:
+        if player2.winner:
+            print(player2.name," wins")
+            win_text = HEALTH_FONT.render(player2.name + "winns",1,WHITE)
+            win.blit(win_text,(WIDTH//2,HEIGHT//2))
+        else:
+            win_text = HEALTH_FONT.render(player.name + "winns",1,WHITE)
+            win.blit(win_text,(WIDTH//2,HEIGHT//2))
     pygame.display.update()
 
 def draw_results(win,currentplayer,p2):

@@ -42,8 +42,8 @@ class Player():
         self.bullets = []
         self.box = pygame.Rect(self.x,self.y,SPACESHIP_WIDTH,SPACESHIP_HEIGHT)
         self.hitflag = False  # metchalew
-
-
+        self.thereisawinner = False
+        self.winner= False
     def draw(self, win,WIDTH):
 
         if self.color == (255,0,0):

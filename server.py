@@ -3,8 +3,8 @@ from _thread import *
 from player import Player
 import pickle
 
-server = "192.168.1.110"
-port = 5666
+server = "10.240.69.149"
+port = 5566
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -30,11 +30,23 @@ def threaded_client(conn, player):
             old_health = players[player].health
             players[player] = data
             players[player].health = old_health
+            # print(players[player].name,players[player].health)
+
             if not data:
                 print("Disconnected")
                 break
             else:
                 if player == 1:
+                    if players[0].health <=0:
+                        players[0].thereisawinner = True
+                        players[1].thereisawinner = True
+                        players[1].winner = True
+                        # print("there is a winner")
+                    if players[1].health <=0:
+                        players[0].thereisawinner = True
+                        players[1].thereisawinner = True
+                        players[0].winner = True
+                        # print("there is a winner")
                     players[0].op_health = players[1].health
                     reply = players[0]
                     if players[1].hitflag == True:
@@ -42,6 +54,16 @@ def threaded_client(conn, player):
                         players[1].hitflag = False
                     conn.sendall(pickle.dumps(reply))
                 if player == 0:
+                    if players[0].health <=0:
+                        players[0].thereisawinner = True
+                        players[1].thereisawinner = True
+                        players[1].winner = True
+                        # print("there is a winner")
+                    if players[1].health <=0:
+                        players[0].thereisawinner = True
+                        players[1].thereisawinner = True
+                        players[0].winner = True
+                        # print("there is a winner")
                     players[1].op_health = players[0].health
                     reply = players[1]
                     if players[0].hitflag == True:
