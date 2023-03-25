@@ -37,38 +37,24 @@ class Player():
         self.rect = (x,y,width,height)
         self.vel = 3
         self.health = 10
-        # self.health2 = 10
-        self.bullet_vel = 3
+        self.op_health = 10
+        self.bullet_vel = 4
         self.bullets = []
         self.box = pygame.Rect(self.x,self.y,SPACESHIP_WIDTH,SPACESHIP_HEIGHT)
-        self.hitflag1 = False  # weqie
-        self.hitflag2 = False  # teweqie
+        self.hitflag = False  # metchalew
+
 
     def draw(self, win,WIDTH):
 
         if self.color == (255,0,0):
-            # red_health_text = HEALTH_FONT.render("Health :" + str(self.health),1,WHITE)
-            # yellow_health_text = HEALTH_FONT.render("Health :" + str(self.health2),1,WHITE)
-
-            # win.blit(red_health_text,(WIDTH-red_health_text.get_width()-10,10))
-            # win.blit(yellow_health_text,(10,10))
-            # pygame.draw.rect(win,RED,self.box)
-
             win.blit(YELLOW_SPACESHIP,(self.x,self.y))
             for bullet in self.bullets:
                 pygame.draw.rect(win,RED,bullet)
         if self.color == (0,0,255):
-            # red_health_text = HEALTH_FONT.render("Health :" + str(self.health),1,WHITE)
-            # yellow_health_text = HEALTH_FONT.render("Health :" + str(self.health2),1,WHITE)
-    
-            # win.blit(red_health_text,(WIDTH-red_health_text.get_width()-10,10))
-            # win.blit(yellow_health_text,(10,10))
-            # pygame.draw.rect(win,RED,self.box)
     
             win.blit(RED_SPACESHIP,(self.x,self.y))
             for bullet in self.bullets:
                 pygame.draw.rect(win,RED,bullet)
-        # pygame.draw.rect(win, self.color, self.rect)
 
     def fire(self):
         if len(self.bullets) < MAX_NUM_BULLETS :
@@ -83,18 +69,18 @@ class Player():
 
                 if p2.box.colliderect(bullet):
                     print("collition accoured")
-                    self.hitflag1 = True
+                    self.hitflag = True
                     self.bullets.remove(bullet)
                 if bullet.x > WIDTH:
                     self.bullets.remove(bullet)
         if self.name == "desta":
             for bullet in self.bullets:
-                if p2.box.colliderect(bullet):
-                    print("collition accoured")
-                    self.hitflag1 = True
-                    self.bullets.remove(bullet)
 
                 bullet.x -= self.bullet_vel 
+
+                if p2.box.colliderect(bullet):
+                    print("collition accoured")
+                    self.bullets.remove(bullet)
 
                 if bullet.x < 0:
                     self.bullets.remove(bullet)
